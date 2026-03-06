@@ -67,25 +67,14 @@
     .phases-grid {
       display: flex;
       flex-direction: column;
-      gap: 0;
       flex: 1;
     }
 
     .phase {
       display: grid;
       grid-template-columns: 1.7in 1fr;
-      grid-template-rows: auto auto;
       gap: 0 0.3in;
       padding: 0.07in 0 0.11in;
-    }
-
-    .phase-title {
-      display: contents;
-    }
-
-    .phase-instructions,
-    .phase ul {
-      margin-top: 0;
     }
 
     .phase-num {
@@ -105,7 +94,6 @@
       letter-spacing: 0.07em;
       text-align: center;
       margin-bottom: 0.08in;
-      align-self: baseline;
     }
 
     .phase-left {
@@ -179,7 +167,6 @@
       .phase:last-child { padding-bottom: 0; }
 
       .phase ul li { line-height: 1.3; padding: 0.04in 0; }
-      .phase ul li:first-child { padding-top: 0; }
     }
   </style>
 </head>
@@ -201,9 +188,7 @@
   <div class="phases-grid">
 
     <div class="phase">
-      <div class="phase-title">
-        <span class="phase-name">Understanding the Problem</span>
-      </div>
+      <span class="phase-name">Understanding the Problem</span>
       <div class="phase-left">
         <span class="phase-num">First.</span>
         <p class="phase-instructions">You have to <em>understand</em> the problem.</p>
@@ -217,9 +202,7 @@
     </div>
 
     <div class="phase">
-      <div class="phase-title">
-        <span class="phase-name">Devising a Plan</span>
-      </div>
+      <span class="phase-name">Devising a Plan</span>
       <div class="phase-left">
         <span class="phase-num">Second.</span>
         <p class="phase-instructions">Find the connection between the data and the unknown. You may be obliged to consider auxiliary problems if an immediate connection cannot be found. You should obtain eventually a <em>plan</em> of the solution.</p>
@@ -236,9 +219,7 @@
     </div>
 
     <div class="phase">
-      <div class="phase-title">
-        <span class="phase-name">Carrying Out the Plan</span>
-      </div>
+      <span class="phase-name">Carrying Out the Plan</span>
       <div class="phase-left">
         <span class="phase-num">Third.</span>
         <p class="phase-instructions"><em>Carry out</em> your plan.</p>
@@ -249,9 +230,7 @@
     </div>
 
     <div class="phase">
-      <div class="phase-title">
-        <span class="phase-name">Looking Back</span>
-      </div>
+      <span class="phase-name">Looking Back</span>
       <div class="phase-left">
         <span class="phase-num">Fourth.</span>
         <p class="phase-instructions"><em>Examine</em> the solution obtained.</p>
