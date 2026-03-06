@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pólya's How to Solve It — Cheatsheet</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #b0b0b0;
+      font-family: Georgia, 'Times New Roman', serif;
+      color: #111;
+      line-height: 1.4;
+    }
+
+    .no-print {
+      text-align: center;
+      padding: 0.6rem;
+    }
+
+    .no-print button {
+      font-family: Georgia, serif;
+      font-size: 0.85rem;
+      padding: 0.35rem 1.1rem;
+      background: white;
+      border: 1px solid #777;
+      cursor: pointer;
+    }
+
+    .page {
+      background: white;
+      width: 8.5in;
+      height: 11in;
+      margin: 0.4rem auto;
+      padding: 0.35in 0.6in 0.35in;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    /* ── Shared header ── */
+
+    .page-header {
+      text-align: center;
+      padding-bottom: 0.1in;
+      margin-bottom: 0.12in;
+      border-bottom: 2px solid #111;
+    }
+
+    .page-header h1 {
+      font-size: 14pt;
+      font-weight: bold;
+      letter-spacing: 0.03em;
+    }
+
+    .page-header .sub {
+      font-size: 8.5pt;
+      font-style: italic;
+      color: #555;
+      margin-top: 0.04in;
+    }
+
+    /* ── Page 1: Four phases ── */
+
+    .phases-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      flex: 1;
+    }
+
+    .phase {
+      display: grid;
+      grid-template-columns: 1.7in 1fr;
+      grid-template-rows: auto auto;
+      gap: 0 0.3in;
+      padding: 0.07in 0 0.11in;
+    }
+
+    .phase-title {
+      display: contents;
+    }
+
+    .phase-instructions,
+    .phase ul {
+      margin-top: 0;
+    }
+
+    .phase-num {
+      font-size: 8.8pt;
+      font-weight: bold;
+      line-height: 1.38;
+      text-align: right;
+      margin-bottom: 0.1in;
+    }
+
+    .phase-name {
+      grid-column: 2;
+      grid-row: 1;
+      font-size: 13pt;
+      font-variant: small-caps;
+      font-weight: bold;
+      letter-spacing: 0.07em;
+      text-align: center;
+      margin-bottom: 0.08in;
+      align-self: baseline;
+    }
+
+    .phase-left {
+      grid-column: 1;
+      grid-row: 2;
+      display: flex;
+      flex-direction: column;
+      text-align: right;
+    }
+
+    .phase-instructions {
+      font-size: 8.8pt;
+      line-height: 1.38;
+      color: #444;
+    }
+
+    .phase ul {
+      grid-column: 2;
+      grid-row: 2;
+      list-style: none;
+    }
+
+    .phase ul li {
+      font-size: 10pt;
+      padding: 0.05in 0;
+      line-height: 1.38;
+    }
+
+    .phase ul li:first-child {
+      padding-top: 0;
+    }
+
+    /* ── Page 2: Alphabetical list ── */
+
+    .alpha-list {
+      columns: 3;
+      column-gap: 0.28in;
+      column-rule: 1px solid #ddd;
+      flex: 1;
+    }
+
+    .alpha-list li {
+      list-style: none;
+      font-size: 8.8pt;
+      line-height: 1.62;
+      break-inside: avoid;
+    }
+
+    .alpha-list li.key {
+      font-weight: bold;
+    }
+
+    /* ── Print ── */
+
+    @media print {
+      body { background: none; }
+
+      .no-print { display: none; }
+
+      .page {
+        width: 100%;
+        height: 100vh;
+        margin: 0;
+        padding: 0.35in 0.6in 0.2in;
+        box-shadow: none;
+        page-break-after: always;
+      }
+
+      .page:last-of-type { page-break-after: auto; }
+
+      .phase:last-child { padding-bottom: 0; }
+
+      .phase ul li { line-height: 1.3; padding: 0.04in 0; }
+      .phase ul li:first-child { padding-top: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="no-print">
+  <button onclick="window.print()">Print — 2 pages, print both sides</button>
+</div>
+
+<!-- ════════════════════════════════════════════
+     PAGE 1 · FOUR-PHASE METHOD
+     ════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <h1><em>How to Solve It</em></h1>
+    <div class="sub">G. Pólya &nbsp;·&nbsp; 1945</div>
+  </div>
+
+  <div class="phases-grid">
+
+    <div class="phase">
+      <div class="phase-title">
+        <span class="phase-name">Understanding the Problem</span>
+      </div>
+      <div class="phase-left">
+        <span class="phase-num">First.</span>
+        <p class="phase-instructions">You have to <em>understand</em> the problem.</p>
+      </div>
+      <ul>
+        <li><em>What is the unknown? What are the data? What is the condition?</em></li>
+        <li>Is it possible to satisfy the condition? Is the condition sufficient to determine the unknown? Or is it insufficient? Or redundant? Or contradictory?</li>
+        <li>Draw a figure. Introduce suitable notation.</li>
+        <li>Separate the various parts of the condition. Can you write them down?</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-title">
+        <span class="phase-name">Devising a Plan</span>
+      </div>
+      <div class="phase-left">
+        <span class="phase-num">Second.</span>
+        <p class="phase-instructions">Find the connection between the data and the unknown. You may be obliged to consider auxiliary problems if an immediate connection cannot be found. You should obtain eventually a <em>plan</em> of the solution.</p>
+      </div>
+      <ul>
+        <li>Have you seen it before? Or have you seen the same problem in a slightly different form?</li>
+        <li><em>Do you know a related problem?</em> Do you know a theorem that could be useful?</li>
+        <li><em>Look at the unknown!</em> And try to think of a familiar problem having the same or a similar unknown.</li>
+        <li><em>Here is a problem related to yours and solved before. Could you use it?</em> Could you use its result? Could you use its method? Should you introduce some auxiliary element in order to make its use possible?</li>
+        <li>Could you restate the problem? Could you restate it still differently? Go back to definitions.</li>
+        <li>If you cannot solve the proposed problem try to solve first some related problem. Could you imagine a more accessible related problem? A more general problem? A more special problem? An analogous problem? Could you solve a part of the problem? Keep only a part of the condition, drop the other part; how far is the unknown then determined, how can it vary? Could you derive something useful from the data? Could you think of other data appropriate to determine the unknown? Could you change the unknown or the data, or both if necessary, so that the new unknown and the new data are nearer to each other?</li>
+        <li>Did you use all the data? Did you use the whole condition? Have you taken into account all essential notions involved in the problem?</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-title">
+        <span class="phase-name">Carrying Out the Plan</span>
+      </div>
+      <div class="phase-left">
+        <span class="phase-num">Third.</span>
+        <p class="phase-instructions"><em>Carry out</em> your plan.</p>
+      </div>
+      <ul>
+        <li>Carrying out your plan of the solution, <em>check each step.</em> Can you see clearly that the step is correct? Can you prove that it is correct?</li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-title">
+        <span class="phase-name">Looking Back</span>
+      </div>
+      <div class="phase-left">
+        <span class="phase-num">Fourth.</span>
+        <p class="phase-instructions"><em>Examine</em> the solution obtained.</p>
+      </div>
+      <ul>
+        <li>Can you <em>check the result?</em> Can you check the argument?</li>
+        <li>Can you derive the result differently? Can you see it at a glance?</li>
+        <li>Can you use the result, or the method, for some other problem?</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     PAGE 2 · HEURISTICS DICTIONARY (A–Z)
+     ════════════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <h1>Short Dictionary of Heuristic</h1>
+  </div>
+
+  <ul class="alpha-list">
+    <li>Analogy</li>
+    <li>Auxiliary elements</li>
+    <li>Auxiliary problem</li>
+    <li>Bolzano, Bernard</li>
+    <li>Bright idea</li>
+    <li>Can you check the result?</li>
+    <li>Can you derive the result differently?</li>
+    <li>Can you use the result?</li>
+    <li>Carrying out</li>
+    <li>Condition</li>
+    <li>Contradictory</li>
+    <li>Corollary</li>
+    <li>Could you derive something useful from the data?</li>
+    <li>Could you imagine a more accessible related problem?</li>
+    <li>Could you restate the problem?</li>
+    <li>Decomposing and recombining</li>
+    <li>Definition</li>
+    <li>Descartes, René</li>
+    <li>Determination, hope, success</li>
+    <li>Diagnosis</li>
+    <li>Did you use all the data?</li>
+    <li>Do you know a related problem?</li>
+    <li>Draw a figure</li>
+    <li>Examine your guess</li>
+    <li>Figures</li>
+    <li>Generalization</li>
+    <li>Have you seen it before?</li>
+    <li>Here is a problem related to yours and solved before.</li>
+    <li>Heuristic</li>
+    <li>Heuristic reasoning</li>
+    <li>If you cannot solve the proposed problem…</li>
+    <li>Induction and mathematical induction</li>
+    <li>Inventor’s paradox</li>
+    <li>Is it possible to satisfy the condition?</li>
+    <li>Leibnitz, Gottfried Wilhelm</li>
+    <li>Lemma</li>
+    <li>Look at the unknown</li>
+    <li class="key">Modern heuristic *</li>
+    <li>Notation</li>
+    <li>Pappus</li>
+    <li>Pedantry and mastery</li>
+    <li>Practical problems</li>
+    <li>Problems to find, problems to prove</li>
+    <li>Progress and achievement</li>
+    <li>Puzzles</li>
+    <li>Reductio ad absurdum and indirect proof</li>
+    <li>Redundant</li>
+    <li>Routine problem</li>
+    <li>Rules of discovery</li>
+    <li>Rules of style</li>
+    <li>Rules of teaching</li>
+    <li>Separate the various parts of the condition</li>
+    <li>Setting up equations</li>
+    <li>Signs of progress</li>
+    <li>Specialization</li>
+    <li>Subconscious work</li>
+    <li>Symmetry</li>
+    <li>Terms, old and new</li>
+    <li>Test by dimension</li>
+    <li>The future mathematician</li>
+    <li>The intelligent problem-solver</li>
+    <li>The intelligent reader</li>
+    <li>The traditional mathematics professor</li>
+    <li>Variation of the problem</li>
+    <li>What is the unknown?</li>
+    <li>Why proofs?</li>
+    <li>Wisdom of proverbs</li>
+    <li>Working backwards</li>
+  </ul>
+</div>
+
+</body>
+</html>
